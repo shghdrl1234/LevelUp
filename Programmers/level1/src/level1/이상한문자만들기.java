@@ -78,3 +78,35 @@ public class 이상한문자만들기 {
     }
 
 }
+
+	class 이상한문자만들기_다른사람 {
+	  public String solution(String s) {
+
+	        String answer = "";
+	        int cnt = 0;
+	        String[] array = s.split("");
+	        // 문자열을 한 글자씩 쪼개서 배열에 저장.
+
+	        for(String ss : array) {
+	        	// 향상된 for문으로 순회
+	            cnt = ss.contains(" ") ? 0 : cnt + 1;
+	            // 공백이 있으면 0으로 초기화, 공백이 없으면 카운트(즉,단어의 길이)
+	            
+	            answer += cnt%2 == 0 ? ss.toLowerCase() : ss.toUpperCase(); 
+	            // answer에 저장하는 시점에 공백 개수로 
+	        }
+	      return answer;
+	  }
+	}
+
+	/*
+	 * 
+	 * 이번 문제는 유독 시간이 많이 걸렸다.
+	 * 
+	 * 이유는 조건을 제대로 이해하지 않고 풀어서인데..
+	 * 
+	 * 명확한 조건을 유추할 수 있는 실력을 가져야겠다.
+	 * 
+	 * /
+	 */
+	
