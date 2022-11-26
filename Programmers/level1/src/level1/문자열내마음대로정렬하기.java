@@ -25,9 +25,9 @@ public class 문자열내마음대로정렬하기 {
 		 * 인덱스 1의 문자가 같은 문자열이 여럿 일 경우, 사전순으로 앞선 문자열이 앞쪽에 위치합니다.
 		 * 
 		 */
-		String[] a = {"absd", "fdfs", "ssdf", "goep", "zzmd", "abcd", "bbde", "cbde","jbde","tbde", "aaaa"}; 
+		String[] a = {"acca","abba", "abbe", "accb", "azds", "azzs", "agzs"}; 
 		int b = 0;
-		solution(a,b);
+		System.out.println(Arrays.toString(solution(a,b)));
 	}
     public static String[] solution(String[] strings, int n) {
     	/*
@@ -51,6 +51,8 @@ public class 문자열내마음대로정렬하기 {
 //    	String[][] str = new String[25][]; 단순히 이런 배열로 하면 길이 설정하기가 힘들다.
     	ArrayList<String>[] str2 = new ArrayList[26];
     	
+    	String[] answer = new String[strings.length];
+    	
     	for(int i = 0; i < 26; i++) {
     		str2[i] = new ArrayList();
     		// 이차원 배열 역할을 하는 ArrayList 생성
@@ -73,34 +75,41 @@ public class 문자열내마음대로정렬하기 {
     	}
     	
     	for(int i = 0; i < str2.length; i++) {
-    		System.out.println("시작 : str2["+i+"] :"+str2[i].toString());
     		// str2의 각 요소의 하위 요소들 꺼내서, 
     		// 1번째 ~ n번째 인덱스 값을 비교한다.
     		String store = "";
+    		System.out.println(i + " 일 때 크기는 : " + str2[i].size());
+    		System.out.println(i + " 일 때 현재 저장된 것 : " + str2[i].toString());
     		
-			for(int j = 0; j < str2[i].size()-1; j++) {
-			
-				for(int c = 0; c < str2[i].get(j).length(); c++) {
-					System.out.println("c 구문 수행 c : " + c);
+				
+    		for(int k = 0; k < str2[i].size()-1; k++) {
 					
-					for(int h = 0; h < str2[i].get(j).length(); h++) {
-					System.out.println("h 구문 수행 h : " + h);
+    			for(int h = 0; h <= 50; h++) {
+    			
 					
-						if((str2[i].get(j)).charAt(h) > (str2[i].get(j+1).charAt(h))) {
-							System.out.println("if 구문 수행");
-							// 각 요소들의 첫번째 문자를 비교하여, 인덱스가 낮은 쪽이 크면(알파벳이 높으면)
-							// 순서를 바꾼다.
+    				for(int j = 0; j < str2[i].size()-1; j++) {
+						// 각 요소들의 h번째 문자를 비교하여, 인덱스가 낮은 쪽이 크면(알파벳이 높으면)
+						// 순서를 바꾼다.
+						
+    				if(str2[i].get(j).length() > h) {
+    					
+    				if((str2[i].get(j)).charAt(h) > (str2[i].get(j+1).charAt(h))) {
 							store = str2[i].get(j);
 							
 							str2[i].set(j,str2[i].get(j+1));
 							
 							str2[i].set(j+1,store);
-							System.out.println("store : " + c + store);
-							System.out.println("str2["+i+"].get("+(j)+") : " + c + str2[i].get(j));
-							System.out.println("str2["+i+"].get("+(j+1)+") : " + c + str2[i].get(j+1));
+							System.out.println("k = " + k + ", h = " + h +", j = "+ j +"일 때  : " + str2[i].toString());
+							System.out.println("j = " + j + " 일 때 store : "  + store);
+							System.out.println("j = " + j + " 일 때 str2[i].get(j) : "  + str2[i].get(j));
+							System.out.println("j = " + j + " 일 때 str2[i].get(j) : "  + str2[i].get(j+1));
 			    				
+							
 						}
-					
+    				}
+//						System.out.println("str2["+1+"].get("+(0)+") : "  + str2[0].get(0));
+//						System.out.println("str2["+1+"].get("+(1)+") : "  + str2[0].get(1));
+//						System.out.println("str2["+1+"].get("+(2)+") : "  + str2[0].get(2));
 					// 위의 for문은 1번째 값을 비교 한 것임, 2번째 ~ str2[i].size -1 번째 까지 비교를 해줘야함.
     			// 그래서 해줘야 할 게 위의 for문을 한 번 더 반복문을 통해 전부 순회 가능한지?
     			// 1. str[i] => i값을 마지막에 돌아줘야함
@@ -113,12 +122,26 @@ public class 문자열내마음대로정렬하기 {
     			// 2회차때는 [1] 기준으로 다시 정렬 되기 때문이다.
     			}
 				}
-				System.out.println("str2["+i+"] :"+str2[i].toString());
-    		}
+			}
+//				System.out.println("str2["+i+"] :"+str2[i].toString());
     	}
     	
+    	int t = 0;
+    	for(int i = 0; i < 26; i++) {
+    		
+    		for(int y = 0; y < str2[i].size(); y++) {  			
     	
-        String[] answer = {};
+    			answer[t] = str2[i].get(y);
+   		
+    		 t++;
+//    		 System.out.println(t+""+i+""+y);
+    		}
+    		
+    		
+    		
+    	}
+    	
+       
         return answer;
     }
 }
