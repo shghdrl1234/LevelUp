@@ -2,6 +2,8 @@ package level1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class 두개뽑아서더하기 {
 
@@ -19,7 +21,7 @@ public class 두개뽑아서더하기 {
 		 * 
 		 */
 
-		solution(new int[] {1,2,3,4,5,6,7,8});
+		solution(new int[] {0,1,2,3,4,5,6,7,8});
 	}
 
     public static int[] solution(int[] numbers) {
@@ -42,23 +44,27 @@ public class 두개뽑아서더하기 {
     	 */
   
         
-        ArrayList<Integer> arr = new ArrayList(); 
+        ArrayList<Integer> arr = new ArrayList<Integer>(); 
         
-        arr.add(0, numbers[0] + numbers[0]);
-        System.out.println(arr.size());
         
         for(int i = 0 ; i < numbers.length-1; i++) {
     			// i를 1개 선택함, numbers.leght-1을 한 이유는 i다음 값으로 j 값을 주기 위함.
         	
-        	for(int j = i+1; j < numbers.length-i; j++) {
+        	for(int j = i+1; j < numbers.length; j++) {
         		// j는 i 이후의 인덱스로 나오게 하자
         		
-        		for(int k = 1; k < arr.size(); k++) {
-        			
-        		if(numbers[i] + numbers[j] != arr.get(k)) {
-        			arr.add(k+1, numbers[i] + numbers[j]);
+        		int k = 0;
+        		while(k < arr.size() && (numbers[i] + numbers[j] != arr.get(k))) {
+        		// 두 값의 합이 arr(k) 값이 아니면 k를 더해라
+        			System.out.println("i = " + i + ", j = " +j +", k = " + k);
+        			System.out.println("arr.size() = " + arr.size());
+        			k++;
+        			// 중요한 것은 반복문이 끝날때, k의 값은 arr.size()와 같아짐.
         		}
         		
+        		if(k == arr.size()) {
+        			//k가 일치하는 것이 없다면 k는 arr.size() 값이 되어버림
+        			arr.add(k, numbers[i] + numbers[j]);
         		}
         	}
         }
@@ -71,8 +77,32 @@ public class 두개뽑아서더하기 {
         	i++;
         }
         
-        System.out.println(Arrays.toString(answer));
+        Arrays.sort(answer);
+        
         return answer;
     }
 	
 }
+
+class 두개뽑아서더하기_다른사람 {
+    public int[] solution(int[] numbers) {
+       Set<Integer> set = new HashSet<>();
+
+       for(int i=0; i<numbers.length; i++) {
+           for(int j=i+1; j<numbers.length; j++) {
+               set.add(numbers[i] + numbers[j]);
+           }
+       }
+
+       return set.stream().sorted().mapToInt(Integer::intValue).toArray();
+   }
+}
+
+/*
+ * 
+ * 대부분의 사람들이 hashSet 또는 treeSet을 사용하였다.
+ * => 공부 요망.
+ * 
+ * 
+ * /
+ */
