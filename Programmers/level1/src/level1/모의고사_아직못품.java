@@ -2,6 +2,8 @@ package level1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class 모의고사_아직못품 {
 
@@ -26,6 +28,10 @@ public class 모의고사_아직못품 {
 		 * 
 		 * 
 		 */
+		int[] a = {1,3,2,4,2};
+		
+		System.out.println(solution(a).length);
+		
 
 	}
 	
@@ -50,7 +56,7 @@ public class 모의고사_아직못품 {
     		A.add(3);
     		A.add(4);
     		A.add(5);
-    		i += 5;
+    		i += 1;
     	}
     	
     	i = 0;
@@ -70,30 +76,30 @@ public class 모의고사_아직못품 {
     		B.add(4);
     		B.add(2);
     		B.add(5);
-    		j += 8;
+    		j += 1;
     	}
     	
-    	for(j = 0; j < answers.length%8; i++ ) {
-    		if(j%2 == 0) {
+    	for(j = 0; j < answers.length%8; j++ ) {
+
+    		if(j == 0 || j == 2 || j == 4 || j ==6 ) {
     			B.add(2);
     			}
-    		if(j%2 == 1) {
-        		B.add(2);
+    		if(j == 1) {
+        		B.add(1);
         		}
-    		if(j%2 == 3) {
+    		if(j == 3) {
         		B.add(3);
         		}
-    		if(j%2 == 5) {
+    		if(j == 5) {
+        		B.add(4);
+        		}
+    		if(j == 7) {
         		B.add(5);
         		}
-    		if(j%2 == 7) {
-        		B.add(7);
-        		}
-
     	}
 		
 		int k = 0;
-    	while(i < answers.length/10) {
+    	while(k < answers.length/10) {
     		C.add(3);
     		C.add(3);
     		C.add(1);
@@ -104,39 +110,40 @@ public class 모의고사_아직못품 {
     		C.add(4);
     		C.add(5);
     		C.add(5);
-    		i += 10;
+    		k += 1;
     	}
     	
-		if(k < answers.length%10) {
-			if(k < 1) {
+    	 
+    	for(int n = 0; n < answers.length%10; n++ ) {
+			if( n == 0) {
 				C.add(3);
 			}
-			if(k < 2) {
+			if(n == 1) {
 				C.add(3);
 			}
-			if(k < 3) {
+			if(n == 2) {
 				C.add(1);
 			}
-			if(k < 4) {
+			if(n == 3) {
 				C.add(1);
 			}
-			if(k < 5) {
+			if(n == 4) {
 				C.add(2);
 			}
-			if(k < 6) {
+			if(n == 5) {
 				C.add(2);
 			}
-			if(k < 7) {
+			if(n == 6) {
 				C.add(4);
 			}
-			if(k < 8) {
+			if(n == 7) {
 				C.add(4);
 			}
-			if(k < 9) {
+			if(n == 8) {
 				C.add(5);
 			}
-		}
-
+    	}
+    	
     	int compareA = 0;
     	int compareB = 0;
     	int compareC = 0;
@@ -157,32 +164,31 @@ public class 모의고사_아직못품 {
     		y++;
     	}
     	
-    	int[] compare = {compareA,compareB,compareC};
     	
-    	Arrays.sort(compare);
-    	
-    	
-    	
-    	if(compare[0] == compare[1] && compare[0] == compare[2]) {
-    		int[] answer = new int[3];
-    		answer[0] = compare[2];
-    		answer[1] = compare[2];
-    		answer[2] = compare[2];
-    		 return answer;
-    				
-    	} else if(compare[2] == compare[1] && compare[1] > compare[0]) {
-    		int[] answer = new int[2];
-    		answer[0] = compare[2];
-    		answer[1] = compare[2];
-    		 return answer;
-    		
-    		
-    	} else {
-    		int[] answer = new int[1];
-    		answer[0] = compare[2];
-    		 return answer;
+    	if(compareA == compareB && compareB == compareC ) {
+    		// 셋 다 같을때
+    		return new int[] {1,2,3};
+    	} else if(compareA == compareB && compareB != compareC && compareA > compareC) {
+    		// A,B 같고 C는 작을 때
+    		return new int[] {1,2};
+    	} else if(compareA == compareC && compareC != compareB && compareA > compareB) {
+    		// A,C 같고 B는 작을 때
+    		return new int[] {1,3};
+    	} else if(compareB == compareC && compareC != compareA && compareB > compareA) {
+    		// B,C 같고 A는 작을 때
+    		return new int[] {2,3};
+    	} else if(compareA > compareC && compareA > compareB) {
+    		// A만 클 때
+    		return new int[] {1};
+    	} else if(compareB > compareC && compareB > compareA) {
+    		// B만 클 때
+    		return new int[] {2};
+    	} else if(compareC > compareA && compareC > compareB) {   		
+    		// C만 클때
+    		return new int[] {3};
     	}
-    	
+    		
+    	return new int[] {};
     }
 
 }
