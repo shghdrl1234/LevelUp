@@ -3,7 +3,7 @@ package level1;
 import java.awt.desktop.SystemSleepEvent;
 import java.util.ArrayList;
 
-public class 다트게임_아직못품 {
+public class A못품_다트게임 {
 
 	public static void main(String[] args) {
 		/*

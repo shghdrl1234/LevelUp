@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class 완주하지못한선수_아직못품 {
+public class A못품_완주하지못한선수 {
 
 	public static void main(String[] args) {
 		/*

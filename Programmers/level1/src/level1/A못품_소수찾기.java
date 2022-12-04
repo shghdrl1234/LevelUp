@@ -1,6 +1,6 @@
 package level1;
 
-public class 家荐茫扁_酒流给前 {
+public class A给前_家荐茫扁 {
 
 	public static void main(String[] args) {
 		/*

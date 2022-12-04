@@ -3,7 +3,7 @@ package level1;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class 문자열내마음대로정렬하기_아직못품 {
+public class A못품_문자열내마음대로정렬하기 {
 
 	public static void main(String[] args) {
 		/*

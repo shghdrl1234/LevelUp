@@ -1,6 +1,6 @@
 package level1;
 
-public class 최대공약수와최소공배수_아직못품 {
+public class A못품_최대공약수와최소공배수 {
 
 	public static void main(String[] args) {
 		/*

@@ -3,7 +3,7 @@ package level1;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class 箭磊娄册_酒流给前 {
+public class A给前_箭磊娄册 {
 
 	public static void main(String[] args) {
 		/*

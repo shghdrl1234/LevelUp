@@ -2,7 +2,7 @@ package level1;
 
 import java.util.ArrayList;
 
-public class 햄버거만들기_아직못품 {
+public class A못품_햄버거만들기 {
 
 	public static void main(String[] args) {
 		/*

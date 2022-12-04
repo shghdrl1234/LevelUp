@@ -2,7 +2,7 @@ package level1;
 
 import java.util.Arrays;
 
-public class 같은숫자는싫어_아직못품 {
+public class A못품_같은숫자는싫어 {
 
 	public static void main(String[] args) {
 		/*

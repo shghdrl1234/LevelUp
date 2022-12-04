@@ -2,7 +2,7 @@ package level1;
 
 import java.util.Arrays;
 
-public class 苞老厘荐_酒流给前 {
+public class A给前_苞老厘荐 {
 
 	public static void main(String[] args) {
 		/*
