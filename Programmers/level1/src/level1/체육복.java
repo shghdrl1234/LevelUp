@@ -33,7 +33,7 @@ public class 체육복 {
 		int a  = 5;
 		int[] b = {2,4};
 		int[] c = {1,3,5};
-		
+		System.out.println();
 		체육복_다른사람 bb = new 체육복_다른사람();
 		bb.solution(a, b, c);
 		solution(a,b,c);
