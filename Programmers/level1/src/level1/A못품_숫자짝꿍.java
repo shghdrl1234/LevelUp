@@ -2,6 +2,9 @@ package level1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class A못품_숫자짝꿍 {
 
@@ -29,10 +32,78 @@ public class A못품_숫자짝꿍 {
 		 * 
 		 * 
 		 */
-		String x ="100";
+		String x ="101111020000";
 		String y ="123450";
-		solution(x,y);
+		
+		solution1(x,y);
+		
 	}
+	
+	 public static String solution1(String X, String Y) {
+	        /*
+	         * 내가 문제 푸는 방법
+	         * 1. 두 문자열을 비교하여 같은 수를 가지는 위치에서 각각 지운다.
+	         * 2. 지운 요소는 다른 배열을 만들어서 저장해둔다.
+	         * 3. 이후 내림차순으로 정렬하여 반환
+	         */
+		 
+			ArrayList<String> xArr = new ArrayList<String>();
+			ArrayList<String> yArr = new ArrayList<String>();
+		 
+			ArrayList<String> sumArr = new ArrayList<String>();
+			
+			for(String i : X.split("")) {
+				xArr.add(i);
+			}
+			
+			for(String i : Y.split("")) {
+				yArr.add(i);
+			}
+			
+			for(int i = 0; i < xArr.size(); i++) {
+				
+				for(int j = 0; j < yArr.size(); j++) {
+					
+					if(xArr.get(i).equals(yArr.get(j))) {
+						sumArr.add(xArr.get(i));
+						
+						xArr.remove(i); i--;
+						yArr.remove(j); j--;
+						break;
+					}
+				}
+			}
+			
+			System.out.println(sumArr);
+			Collections.sort(sumArr, Collections.reverseOrder());
+			System.out.println(sumArr);
+			
+			String answer = "";
+			
+			for(String s : sumArr) {
+				answer += s;
+			}
+			
+			if(answer.length() == 0) {
+				answer = "-1";
+			}
+			
+			int cnt = 0;
+			
+			for(int i = 0; i < answer.length(); i++) {
+				if(answer.charAt(i) != '0') {
+					cnt++;
+				}
+			}
+			
+			if(cnt == 0) {
+				answer = "0";
+			}
+			
+			
+			System.out.println(answer);
+	    	return answer;
+	    }
 	
 	
 	
