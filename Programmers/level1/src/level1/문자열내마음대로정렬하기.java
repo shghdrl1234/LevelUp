@@ -2,27 +2,97 @@ package level1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
-public class A못품_문자열내마음대로정렬하기 {
+public class 문자열내마음대로정렬하기 {
 
 	public static void main(String[] args) {
 		/*
-		 * 문제 설명 문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순
-		 * 정렬하려합니다.
+		 * 문제 설명 
+		 * 문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 
+		 * 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순 정렬하려합니다.
 		 * 
 		 * 예를 들어 strings가 ["sun", "bed", "car"]이고 n이 1이면 각 단어의 인덱스 1의 문자 "u", "e", "a"로
 		 * strings를 정렬합니다.
 		 * 
-		 * 제한 조건 strings는 길이 1 이상, 50이하인 배열입니다. strings의 원소는 소문자 알파벳으로 이루어져 있습니다.
-		 * strings의 원소는 길이 1 이상, 100이하인 문자열입니다. 모든 strings의 원소의 길이는 n보다 큽니다. 인덱스 1의 문자가
-		 * 같은 문자열이 여럿 일 경우, 사전순으로 앞선 문자열이 앞쪽에 위치합니다.
+		 * 제한 조건 
+		 * strings는 길이 1 이상, 50이하인 배열입니다. 
+		 * strings의 원소는 소문자 알파벳으로 이루어져 있습니다.
+		 * strings의 원소는 길이 1 이상, 100이하인 문자열입니다. 
+		 * 모든 strings의 원소의 길이는 n보다 큽니다. 
+		 * 인덱스 1의 문자가 같은 문자열이 여럿 일 경우, 사전순으로 앞선 문자열이 앞쪽에 위치합니다.
 		 * 
 		 */
-		String[] a = { "aab", "aa", "aac", "aac", "aa", "abd", "aby", "ab", "ab", "kkaiie", "adfgdf", "asdfs", "egcdfg",
-				"hsdfhsv", "msdfg", "sdssdfg", "msd", "uyfk", "cmgyums", "uifs", "gghjlx", "kkhhgv", "kfghkfghs",
-				"ftyjftyjv", "kfgykf", "fghjkfz" };
+		String[] a = { "ba","acc","bbc","bb","ca","aab", "aa","bbr", "aac","ac","va","ka","bakka","bbd"};
 		int b = 1;
-		System.out.println(Arrays.toString(solution(a, b)));
+		System.out.println(Arrays.toString(solution1(a, b)));
+	}
+	
+	public static String[] solution1(String[] strings, int n) {
+		/*
+		 * 문제 푸는 방법.
+		 * 
+		 * 1. n번째 인덱스 기준으로 오름차 순 정렬 진행.
+		 * 
+		 * 2. 이후 n 번째 인덱스 기준, 같은 문자들을 오름차 순으로 정렬
+		 * 
+		 * 3. 2번을 a~z까지 반복
+		 * 
+		 * 
+		 */
+		
+		ArrayList<String>[] str2 = new ArrayList[26];
+
+
+		for (int i = 0; i < 26; i++) {
+			str2[i] = new ArrayList();
+			// 이차원 배열 역할을 하는 ArrayList 생성
+			// str2[0] ~ str2[25] chd 26개 생성.
+
+		}
+
+		for (int i = 0; i < strings.length; i++) {
+			char x = strings[i].charAt(n);
+			str2[x - 97].add(strings[i]);
+		}
+		
+		String[] arr = strings.clone();
+		String store = "";
+		for(int i = 0; i < arr.length; i++) {
+			
+			for(int j = 0; j < arr.length-1; j++) {
+				
+				if(arr[j].charAt(n) > arr[j+1].charAt(n)) {
+					store = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = store;
+				}
+			}
+			
+		}
+		
+		System.out.println(n+"번째 인덱스 기준으로 오름차순으로 정렬 : "+ Arrays.toString(arr));
+		// 오름차 순으로 정렬
+		
+		
+		int cnt = 0;
+			
+			for(int j = 0; j < arr.length-1; j++) {
+					
+					for(int k = 0; k < arr.length-1 ; k++) {
+						if(arr[k].compareTo(arr[k+1]) > 0 && arr[k].charAt(n) == arr[k+1].charAt(n)) {
+							store = arr[k];
+							arr[k] = arr[k+1];
+							arr[k+1] = store;
+					}
+						
+				
+					
+				}
+			
+		}
+		
+		return arr;
 	}
 
 	public static String[] solution(String[] strings, int n) {
@@ -157,4 +227,25 @@ public class A못품_문자열내마음대로정렬하기 {
 
 		return answer;
 	}
-}
+
+}	
+	class 문자열내마음대로정렬하기_다른사람 {
+	    public String[] solution(String[] strings, int n) {
+	        String[] answer = {};
+	        ArrayList<String> arr = new ArrayList<>();
+	        for (int i = 0; i < strings.length; i++) {
+	            arr.add("" + strings[i].charAt(n) + strings[i]);
+	        }
+	        Collections.sort(arr);
+	        answer = new String[arr.size()];
+	        for (int i = 0; i < arr.size(); i++) {
+	            answer[i] = arr.get(i).substring(1, arr.get(i).length());
+	        }
+	        return answer;
+	    }
+	}
+	// 이 코드는 n을 맨 앞으로 빼와서 정렬을 진행하였다.
+	// 내가 한 코드보다 더 간결하게 만들 수 있었던 이유.
+	
+	
+

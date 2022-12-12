@@ -15,6 +15,14 @@ public class A给前_伙柳过第笼扁 {
 		
 		solution(99999998);
 	}
+	
+	public static int solution1(int n) {
+		 
+	
+		
+		
+		 return 0;
+	 }
 
     public static int solution(int n) {
     	

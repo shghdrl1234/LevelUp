@@ -1,8 +1,10 @@
 package level1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
-public class A못품_과일장수 {
+public class 과일장수 {
 
 	public static void main(String[] args) {
 		/*
@@ -35,10 +37,48 @@ public class A못품_과일장수 {
 		 * 
 		 */
 		
-		solution(3,4,new int[] {1, 2, 3, 1, 2, 3, 1});
+//		solution1(3,4,new int[] {1, 2, 3, 1, 2, 3, 1});
+		solution1(4,3,new int[] {4, 1, 2, 2, 4, 4, 4, 4, 1, 2, 4, 2});
 		
 	}
+	public static int solution1(int k, int m, int[] score) {
+		/*
+		 * 1. 박스안에 있는 최저 품질을 기준으로 잡자.
+		 * 2. 최저 품질 먼저 다 담고 최고 품질을 넣는다.
+		 * 
+		 */
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		
+		for(int i : score) {
+			arr.add(i);
+		}
+		
+		arr.sort(Comparator.reverseOrder());
+		
+		int answer = 0;
+		int num = score.length;
+		int box=9;
+		
+		for(int j = 0; j < score.length; j+=m) {
+			System.out.println(m);
+			if(num >= m ) {
+				for(int i = 0; i < m; i++) {
+					if(arr.get(score.length-num+i) < box) {
+						box = arr.get(score.length-num+i);
+					}
+				}
+				num -= m;
+				answer += box*m;
+				box=9;
+				
+			}
+		}
+		
+		System.out.println(answer);
+		return answer;
+	}
 	
+		
     public static int solution(int k, int m, int[] score) {
     	/*
     	 * 내가 푸는 방법
@@ -85,3 +125,24 @@ public class A못품_과일장수 {
     }
 
 }
+
+
+class 과일장수_다른사람 {
+    public int solution(int k, int m, int[] score) {
+        int answer = 0;
+
+        Arrays.sort(score);
+
+        for(int i = score.length; i >= m; i -= m){
+            answer += score[i - m] * m;
+        }
+
+        return answer;
+    }
+    /*
+     * for문에서 모든 작업을 한 번에 진행시켜서 코드를 최소화 시켰다.
+     */
+}
+
+
+

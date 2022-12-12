@@ -32,12 +32,111 @@ public class A못품_숫자짝꿍 {
 		 * 
 		 * 
 		 */
-		String x ="101111020000";
-		String y ="123450";
+		String x ="10211110200005";
+		String y ="11122234450";
 		
-		solution1(x,y);
+		solution2(x,y);
 		
 	}
+	
+	
+	public static String solution2(String X, String Y) {
+        
+		/*
+		 * 시간 복잡도 면에서 중첩 for문을 사용하지말라고 한다.
+		 * 
+		 * 1. 숫자를 이용하여 문제를 푼다.
+		 * 2. 각 숫자별로 출현한 횟수를 구한 다음
+		 * 3. 작게 나온 쪽을 최대 값으로 잡는다. 
+		 * 
+		 * 
+		 * 
+		 */
+		ArrayList<Integer> xArr = new ArrayList<Integer>();
+		ArrayList<Integer> yArr = new ArrayList<Integer>();
+	 
+		ArrayList<Integer> sumArr = new ArrayList<Integer>();
+		
+		for(int i = 0; i < 10; i++) {
+			xArr.add(0);
+			yArr.add(0);
+		} // 각 리스트에 0을 넣음.
+		
+		for(int i = 0; i < X.length(); i++) {
+			
+			for(int j = 0; j < 10; j++) {
+				
+				if(X.charAt(i) == j+48 ) {
+					xArr.set(j, xArr.get(j)+1);
+				}
+				
+			}
+			
+		}
+		
+		for(int i = 0; i < Y.length(); i++) {
+			
+			for(int j = 0; j < 10; j++) {
+				
+				if(Y.charAt(i) == j+48 ) {
+					yArr.set(j, yArr.get(j)+1);
+				}
+				
+			}
+			
+		}
+		
+		for(int i = 0; i < 10; i++) {
+			if(xArr.get(i) <= yArr.get(i)) {
+				sumArr.add(xArr.get(i));
+			} else {
+				sumArr.add(yArr.get(i));
+			}
+		}
+		
+		
+		
+		System.out.println("xArr : " + xArr);
+		System.out.println("yArr : " + yArr);
+		System.out.println("sumArr : " + sumArr);
+		
+		String answer = "";
+		
+		for(int i = 0; i < sumArr.size(); i++) {
+			
+			for(int j = 0; j < sumArr.get(i); j++) {
+				answer += ("" + i);
+			}
+			
+		}
+
+		StringBuffer sb = new StringBuffer(answer);
+		String reverse = sb.reverse().toString();
+		
+		System.out.println(answer);
+		System.out.println(reverse);
+		
+	
+		if(reverse.length() == 0) {
+			reverse = "-1";
+		}
+			
+		int cnt = 0;
+		
+		for(int i = 0; i < reverse.length(); i++) {
+			if(reverse.charAt(i) != 48) {
+				cnt++;
+				break;
+			}
+		}
+		
+		if(cnt == 0) {
+			reverse = "0";
+		}
+		
+		return reverse;
+    }
+
 	
 	 public static String solution1(String X, String Y) {
 	        /*

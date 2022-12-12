@@ -1,8 +1,9 @@
 package level1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class 최소직사각형_못품 {
+public class 최소직사각형 {
 
 	public static void main(String[] args) {
 		/*
@@ -42,8 +43,52 @@ public class 최소직사각형_못품 {
 		aa[0][1] = 42;
 		aa[1][0] = 62;
 		aa[1][1] = 2;
-		System.out.println(solution(aa));
+		System.out.println(solution1(aa));
 		
+	}
+	
+	public static int solution1(int[][] sizes) {
+		System.out.println(sizes.length);
+		System.out.println(sizes[0].length);
+		/*
+		 * 1. 가장 명함의 큰 가로 or 세로의 크기와
+		 * 2. 그 명함을 제외한 명함 전체에서, 가로 or 세로 중 큰 값들을 각각 지운다.
+		 * 3. 남아 있는 명함들의 한 쪽 길이 중에 가장 큰 값을 구한다.
+		 */
+		int[][] arr = sizes.clone();
+		int large = 0;
+		for(int i = 0 ; i < arr.length; i++) {
+			
+			for(int j = 0 ; j < arr[i].length; j++) {
+				if(arr[i][j] > large) {
+					large = arr[i][j];
+				}
+			}
+		}
+		
+		for(int i = 0 ; i < arr.length; i++) {
+				
+				for(int j = 0 ; j < arr[i].length-1; j++) {
+					if(arr[i][j] > arr[i][j+1]) {
+						arr[i][j] = 0;
+					} else {
+						arr[i][j+1] = 0;
+					}
+				}
+			}
+		
+		int large2 = 0;
+		
+		for(int i = 0 ; i < arr.length; i++) {
+			
+			for(int j = 0 ; j < arr[i].length; j++) {
+				if(arr[i][j] > large2) {
+					large2 = arr[i][j];
+				}
+			}
+		}
+		
+		return large*large2;
 	}
 
 
@@ -185,3 +230,39 @@ public class 최소직사각형_못품 {
 			
 	}
 }
+
+	class 최소직사각형_다른사람 {
+	    public int solution(int[][] sizes) {
+	        int small = 0;
+	        int large = 0;
+	
+	        for(int[] card : sizes){
+	            if(card[0] < card[1]){
+	                small = Math.max(small, card[0]);
+	                large = Math.max(large, card[1]);
+	                continue;
+	            }
+	            small = Math.max(small, card[1]);
+	            large = Math.max(large, card[0]);
+	
+	        }
+	
+	        return small * large;
+	    }
+	}
+	
+	class 최소직사각형_다른사람2 {
+	    public int solution(int[][] sizes) {
+	        return Arrays.stream(sizes).reduce((a, b) -> new int[]{
+	                Math.max(Math.max(a[0], a[1]), Math.max(b[0], b[1])), Math.max(Math.min(a[0], a[1]), Math.min(b[0], b[1]))
+	        }).map(it -> it[0] * it[1]).get();
+	    }
+	}
+	
+	/*
+	 * 내가 처음 풀 때는 어려웠는데 생각을 바꾸니 바로 풀렸다.
+	 * 
+	 * 다른 분들의 코드를 보면 Math.max, Math.min을 많이 활용 하였다.
+	 * 
+	 * 
+	 */ 
