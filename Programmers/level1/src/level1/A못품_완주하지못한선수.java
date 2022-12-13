@@ -1,5 +1,6 @@
 package level1;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -26,10 +27,47 @@ public class A못품_완주하지못한선수 {
 		 * 
 		 * 
 		 */
-		String[] arr1 = {"leo", "kiki", "eden"};
-		String[] arr2 = {"eden", "kiki"};
+		String[] arr1 = {"leo", "kiki", "eden","leo"};
+		String[] arr2 = {"eden", "kiki", "leo"};
 		
-		solution(arr1,arr2);
+		solution1(arr1,arr2);
+	}
+	
+	public static String solution1(String[] participant, String[] completion) {
+		/*
+		 * 내가 문제 푸는 방법
+		 * 1. 완주 못한 1명을 찾는다.
+		 * 2. participant와 completion을 비교하여 같은 이름의 선수를 지운다.
+		 * 3. 마지막 남은 1명의 이름을 반환한다.
+		 * 
+		 */
+
+		ArrayList<String> arr1 = new ArrayList<String>();
+		ArrayList<String> arr2 = new ArrayList<String>();
+		
+		for(String s : participant) {
+			arr1.add(s);
+		}
+		
+		for(String s : completion) {
+			arr2.add(s);
+		}
+		
+		for(int i = 0; i < arr2.size(); i++) {
+			
+			for(int j = 0; j < arr1.size(); j++) {
+				if(arr2.get(i).equals(arr1.get(j))) {
+					arr1.remove(j);
+					j--;
+					break;
+				}
+			}
+			
+		}
+		
+		String answer = arr1.get(0);
+		System.out.println(answer);
+		return answer;
 	}
 	
     public static String solution(String[] participant, String[] completion) {
