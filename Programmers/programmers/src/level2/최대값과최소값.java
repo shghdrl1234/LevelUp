@@ -48,3 +48,32 @@ public class 최대값과최소값 {
     }
 	
 }
+
+class 최대값과최소값_다른사람 {
+    public String getMinMaxString(String str) {
+        String[] tmp = str.split(" ");
+        int min, max, n;
+        min = max = Integer.parseInt(tmp[0]);
+        for (int i = 1; i < tmp.length; i++) {
+                n = Integer.parseInt(tmp[i]);
+            if(min > n) min = n;
+            if(max < n) max = n;
+        }
+
+        return min + " " + max;
+
+    }
+
+}
+
+
+/*
+ * 
+ * 레벨 2치고는 쉬운문제라고 생각.
+ * 레벨 1로 가도 될 듯.
+ * 
+ * 
+ * 
+ */
+
+
