@@ -1,6 +1,8 @@
 package level2;
 
-public class JadenCase문자열만들기 {
+import java.util.Arrays;
+
+public class A못품_JadenCase문자열만들기 {
 
 	public static void main(String[] args) {
 		/*
@@ -17,8 +19,15 @@ public class JadenCase문자열만들기 {
 		 * 숫자로만 이루어진 단어는 없습니다. 
 		 * 공백문자가 연속해서 나올 수 있습니다.
 		 */
+		
+		String s = "3  2   1   a  dd s         ";
+		String[] arr = s.split(" ");
+		System.out.println(Arrays.toString(arr));
+		System.out.println(arr.length);
+		System.out.println("===============");
+		System.out.println(solution(s));
 	}
-    public String solution(String s) {
+    public static String solution(String s) {
        /*
         * 내가 문제 푸는 방법
         * 1. split으로 배열 만들기
@@ -33,18 +42,30 @@ public class JadenCase문자열만들기 {
     	
     	for(int i = 0; i < arr.length; i++) {
     		
-    		if(arr[i].charAt(0) >= 97 && arr[i].charAt(0) < 122) {
-    			arr[i] = (char)(arr[i].charAt(0)-(char)32)+""+ arr[i].substring(1);
+    		if(arr[i].length() > 1 && arr[i].charAt(0) >= 97 && arr[i].charAt(0) < 122 ) {
+    			arr[i] = (char)(arr[i].charAt(0)-(char)32)+""+ arr[i].substring(1).toLowerCase();
+    		}
+    		
+    		if(arr[i].length() == 1 && arr[i].charAt(0) >= 97 && arr[i].charAt(0) < 122 ) {
+    			arr[i] = (char)(arr[i].charAt(0)-(char)32)+"";
     		}
     		
     	}
     	
     	for(int i = 0; i < arr.length; i++) {
-    		answer += arr[i];
     		
-    		if(i < arr.length-1) {
+    		if(!arr[i].isBlank()) {
+    			
+    			if(i == arr.length-1) {
+    				answer += arr[i];
+    			} else {
+    				answer += arr[i] + " ";
+    			}
+    			
+    		} else {
     			answer += " ";
     		}
+    		
     	}
     	
         return answer;
