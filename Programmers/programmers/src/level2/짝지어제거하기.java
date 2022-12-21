@@ -24,7 +24,7 @@ public class 짝지어제거하기 {
 		 * 
 		 */
 
-		solution("abbabbsnnsnnsnnbannannannadndnsnsnsssnsndn");
+		solution("aabbaa");
 		
 	}
 	
@@ -36,6 +36,7 @@ public class 짝지어제거하기 {
     	 * 2. 제거시, 원래 길이가 2 줄었으니, 증감연산자에 의한 변수의 값도 -1 해준다.
     	 * 3. 그리고 그 위치를 기준으로 인덱스 비교.
     	 * 
+    	 * 효율성 테스트 실패
     	 */
         int answer = 0;
         
@@ -44,13 +45,17 @@ public class 짝지어제거하기 {
         for(int i = 0; i < sb.length()-1; i++) {
         	System.out.println("변경 전 : "  + i);
         	System.out.println("변경 전 : "+ sb);
-        	if(sb.charAt(i) == sb.charAt(i+1)) {
+        	if(i < 0) {
+        		i = 0;
+        	}
+        	if(sb.length() > 1 && sb.charAt(i) == sb.charAt(i+1)) {
         		sb.replace(i, i+2, "");
-        		i-=2;
+        		i -= 2;
         		System.out.println("변경 후 : "  + i);
         		System.out.println("변경 후 : "+ sb);
         	}
         }
+        
         if(sb.length() == 0) {
         	answer = 1;
         }
