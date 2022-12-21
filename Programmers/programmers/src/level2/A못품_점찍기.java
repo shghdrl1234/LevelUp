@@ -1,6 +1,6 @@
 package level2;
 
-public class Á¡Âï±â {
+public class A¸øÇ°_Á¡Âï±â {
 
 	public static void main(String[] args) {
 		/*
