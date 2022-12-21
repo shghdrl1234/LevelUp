@@ -1,6 +1,6 @@
 package practice;
 
-public class Stringbuffer {
+public class PracticeStringbuffer {
 
 	public static void main(String[] args) {
 		

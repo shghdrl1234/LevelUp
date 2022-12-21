@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Stringbuilder {
+public class PracticeStringbuilder {
 
 	 public String[] solution(String[] orders) {
 	        String[] answer = {};
