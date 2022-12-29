@@ -19,8 +19,24 @@ public class A못품_다음큰숫자 {
 		 * 
 		 */
 
-		solution(78);
+		solution(1000000);
 		
+	}
+	
+	public static int solution2(int n) {
+		/*
+		 * 1 - 1
+		 * 2 - 10
+		 * 3 - 11
+		 * 4 - 100
+		 * 5 - 101
+		 * 6 - 110
+		 * 7 - 111
+		 * 8 - 1000
+		 * 
+		 */
+		
+		return 0;
 	}
 	
     public static int solution(int n) {
@@ -33,7 +49,6 @@ public class A못품_다음큰숫자 {
     	 * 3. 1씩 더하면서 1의 개수가 num과 같아질 때 까지 반복.
     	 * 4. num이 같아지면 10진법으로 변경 
     	 * 
-    	 * 
     	 * => 효율성 테스트 실패
     	 */
     	
@@ -41,7 +56,7 @@ public class A못품_다음큰숫자 {
         int answer = 0;
 
         String binaNum = Integer.toBinaryString(n);
-        
+        System.out.println("binaNum : " + binaNum);
         int num = 0;
         for(int i = 0; i < binaNum.length(); i++) {
         	if(binaNum.charAt(i) == '1') {

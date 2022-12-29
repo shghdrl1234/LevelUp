@@ -27,29 +27,8 @@ public class A못품_점찍기 {
 
     public long solution(int k, int d) {
     	
-    	/*
-    	 * 내가 문제 푸는 방법
-    	 * 1. 원점부터 점의 거리 (ak)^2 + (bk)^2가 d^2보다 작으면 됨.
-    	 * => k^2(a+b)^2-2ab 의 제곱근이 d보다 작거나 같아야 한다.
-    	 * => k^2(a+b)^2-2ab 이 d^2보다 작거나 같다.
-    	 * 
-    	 * => b <= d^2/k^2-a
-    	 * 1
-    	 * 
-    	 */
-        long answer = 0;
-        
-        	
-        	for(long a = 0; a <= d; a++) {
-        		for(long b = 0; b <= Math.pow(d/k,2)-a; b++) {
-        			
-        			if(Math.pow(k*(a+b), 2)-2*a*b <= Math.pow(d, 2)) {
-        			answer +=1;
-        			}  
-        		}
-        	}
-        
-        return answer;
+    	
+        return 0;
     }
 	
 	

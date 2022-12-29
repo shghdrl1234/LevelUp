@@ -1,5 +1,8 @@
 package level2;
 
+import java.util.Stack;
+
+
 public class 짝지어제거하기 {
 
 	public static void main(String[] args) {
@@ -24,8 +27,36 @@ public class 짝지어제거하기 {
 		 * 
 		 */
 
-		solution("aabbaa");
+		solution1("abbabb");
 		
+	}
+	
+	public static int solution1(String s){
+		/*
+		 * 내가 푸는 방법
+		 * 1. stack을 활용하여 연속적인 문자가 나오면 pop
+		 */
+		
+		int answer = 0;
+		
+		Stack<String> st = new Stack<String>();
+		
+		String[] arr = s.split("");
+
+		st.push(arr[0]);
+		for(int i = 1; i < arr.length; i++) {
+			if(st.size() >0  && st.peek().equals(arr[i])) {
+				st.pop();
+			} else {
+				st.push(arr[i]);
+			}
+		}
+
+		if(st.size() == 0) {
+			answer = 1;
+		}
+		
+		return answer;
 	}
 	
     public static int solution(String s){
@@ -64,3 +95,23 @@ public class 짝지어제거하기 {
     }
 
 }
+
+/*
+ * 처음에는 스트링빌더를 사용하여 접근을 해보았다.
+ * => 스트링빌더 또한 배열 구조를 사용한 것이라, 배열 중간에서 수정, 삭제를 하게되면
+ * 작업시간이 길어짐.
+ * => linkedList를 활용하려 했으나, 배열에 접근하는 시간이 길어짐
+ * => 접근은 arrayList로, 수정은 linkedList로 하려고 시도하였는데
+ * 같은 문자가 삭제되면 변수가 가지는 값이 서로 달라져서 실패
+ * 
+ * => 최종적으로 Stack을 생각함.
+ * 배열의 끝부분을 수정,삭제할 때는 작업시간 상관이 없다. 그 이유는 JDI 레포지토리에 나옴.
+ * push되는 값만 보고 수정, 삭제를 할 수 있으니
+ * 접근시간과, 작업시간 모두 양호함.
+ * 
+ * 
+ * 
+ * 
+ */
+
+

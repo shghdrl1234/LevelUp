@@ -1,6 +1,6 @@
 package level2;
 
-public class 钢府顿扁 {
+public class A给前_钢府顿扁 {
 
 	public static void main(String[] args) {
 		/*
