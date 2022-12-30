@@ -1,6 +1,6 @@
 package level2;
 
-public class A못품_다음큰숫자 {
+public class 다음큰숫자 {
 
 	public static void main(String[] args) {
 		/*
@@ -79,3 +79,21 @@ public class A못품_다음큰숫자 {
     }
 
 }
+
+class 다음큰숫자_다른사람 {
+    	public int nextBigNumber(int n) {
+    		int a = Integer.bitCount(n);
+    		int compare = n+1;
+
+	      while(true) {
+	    	  if(Integer.bitCount(compare)==a)
+	          break;
+	        compare++;
+	      }
+
+	      return compare;
+    }
+}
+/*
+ * 나와 비슷한 방식인데 bitcount라는 메서드를 활용함.
+ */
