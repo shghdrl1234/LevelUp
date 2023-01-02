@@ -25,64 +25,52 @@ public class A못품_이진변환반복하기 {
 		 */
 		solution("01110");
 	}
-	public static int[] solution2(String s) {
-		/*
-		 * 
-		 * 
-		 */
-		
-		
-		return new int[0];
-	}
-    public static int[] solution(String s) {
-    	/*
-    	 * 내가 문제 푸는 방법
-    	 * 1. s에서 0을 제거 한다. => 0의 개수만큼 카운트
-    	 * 2. s를 s의 길이의 2진법으로 나타낸다. 
-    	 * 3. s가 1이 될 때까지 반복.
-    	 * 
-    	 * 문자열의 삭제, 변경이 주로 발생함 => linkedList?
-    	 */
-        int[] answer = {0, 0};
-        
-        int zero = 0;
-        
-        String[] arr = s.split("");
-        
-        LinkedList ll = new LinkedList();
-        System.out.println(ll.size());
-	       
-        for(String a : arr) {
-        	ll.add(a);
-        }
-        
-        int k =0;
-        while(ll.size() > 1) {
+	   public static int[] solution(String s) {
+	    	/*
+	    	 * 내가 문제 푸는 방법
+	    	 * 1. s에서 0을 제거 한다. => 0의 개수만큼 카운트
+	    	 * 2. s를 s의 길이의 2진법으로 나타낸다. 
+	    	 * 3. s가 1이 될 때까지 반복.
+	    	 * 
+	    	 * 문자열의 삭제, 변경이 주로 발생함 => linkedList?
+	    	 */
+	        int[] answer = {0, 0};
 	        
-        	int j = 0;
-        	for(Object a : ll) {
-        		ll.set(j, a);
-        		j++;
-        	}
-        	
-	        while(ll.contains("0")) {
-	        	ll.remove("0");
-	        	zero ++;
+	        int zero = 0;
+	        
+	        String[] arr = s.split("");
+	        
+	        for(String a : arr) {
+	        	// linkedList 컬렉션에 문자 추가.
+	        	ll.add(a);
 	        }
 	        
-	        int i = 0;
-	        for(String a : Integer.toBinaryString(ll.size()).split("")) {
-	        	ll.set(i, a);
-	        	i++;
+	        int k =0;
+	        while(ll.size() > 1) {
+		        
+	        	
+		        while(ll.contains("0")) {
+		        	// 문자 0이 없어질 때 까지 반복
+		        	ll.remove("0");
+		        	zero ++;
+		        }
+		        
+		        // ll 컬렉션 객체의 길이를 이진법으로 나타내고,
+		        String[] lb = Integer.toBinaryString(ll.size()).split("");
+		        ll.clear();
+		        
+		        int i = 0;
+		        for(String a : lb) {
+		        	// 그 이진법을 ll 컬렉션에 저장
+		        	ll.add(i, a);
+		        	i++;
+		        }
+		        
+	        k++;
 	        }
-        k++;
-        }
-        
-        System.out.println("ll의 요소 : " +ll);
-        System.out.println(zero);
-        answer[0] = k;
-        answer[1] = zero;
-        return answer;
-    }
+	        answer[0] = k;
+	        answer[1] = zero;
+	        return answer;
+	    }
 
-}
+	}
