@@ -27,10 +27,50 @@ public class A못품_완주하지못한선수 {
 		 * 
 		 * 
 		 */
-		String[] arr1 = {"leo", "kiki", "eden","leo"};
-		String[] arr2 = {"eden", "kiki", "leo"};
+		String[] arr1 = {"leo", "kiki", "eden"};
+		String[] arr2 = {"eden", "kiki"};
 		
-		solution1(arr1,arr2);
+		solution2(arr1,arr2);
+	}
+	
+	public static String solution2(String[] participant, String[] completion) {
+		/*
+		 * 내가 문제 푸는 방법
+		 * 1. 완주 못한 1명을 찾는다.
+		 * 2. participant와 completion을 비교하여 같은 이름의 선수를 지운다.
+		 * 3. 마지막 남은 1명의 이름을 반환한다.
+		 * 
+		 */
+
+		ArrayList<String> arr1 = new ArrayList<String>();
+		ArrayList<String> arr2 = new ArrayList<String>();
+		
+		for(int i = 0; i < participant.length; i++) {
+			// 순회하면서 참가자 명단을 저장.
+			arr1.add(participant[i]);
+			System.out.println(arr1);
+			
+			// 순회하면서 완주자 명단 저장.
+			if(i < participant.length-1) {
+				arr2.add(completion[i]);
+				System.out.println("arr2 : "+arr2);
+				
+//				 현재 보고있는 완주자의 이름이, 참가자 명단에 있으면
+//				 참가자 명단에서 그 이름 하나만 삭제.
+//				 완주자 명단에서도 삭제.
+				// 참가자 명단이 늘어나서 지워질 수가 있고,
+				// 완주자 명단이 늘ㅇ
+				if(arr1.contains(completion[i])) {
+					arr1.remove(completion[i]);
+					arr2.remove(completion[i]);
+				}
+			}
+			System.out.println("arr2 - 1 : "+arr2);
+		}
+
+		String answer = arr1.get(0);
+		System.out.println(answer);
+		return answer;
 	}
 	
 	public static String solution1(String[] participant, String[] completion) {

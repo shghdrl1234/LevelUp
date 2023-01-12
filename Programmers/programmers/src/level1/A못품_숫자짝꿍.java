@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class A¸øÇ°_¼ıÀÚÂ¦²á {
 
@@ -32,12 +33,15 @@ public class A¸øÇ°_¼ıÀÚÂ¦²á {
 		 * 
 		 * 
 		 */
-		String x ="10211110200005";
-		String y ="11122234450";
+		String x ="5525";
+		String y ="1255";
 		
-		solution2(x,y);
+		System.out.println(solution2(x,y));
+		
+		
 		
 	}
+	
 	
 	
 	public static String solution2(String X, String Y) {
