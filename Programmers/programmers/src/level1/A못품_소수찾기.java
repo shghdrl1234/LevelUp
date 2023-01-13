@@ -20,29 +20,25 @@ public class A못품_소수찾기 {
     public int solution(int n) {
      /*
       * 내가 문제 푸는 방법
-      * 1. n을 1부터 n까지 나눴을때 나머지가 나오지 않는 것은 1과 n의 약수다.
+      * 1. 소수 = 최대 공약수 자기 자신.
+      * => 1부터 n 사이 임의의 수의 최대 공약수를 구한다.
+      * => 최대 공약수가, 임의의 수와 같으면 카운트
       * 
       */
-    	int num = n;
-    	int a = 0;
+
     	int answer = 0;
     	
-    	for(int i = 2; i <= n; i++) {
+    	int num = 2;
+    	int one = 1;
+    	
+    	for(int i = 1; i < n; i++) {
     		
-    		int j = 1;
-    		while(j < i) {
-    			
-    			if(i%j == 0) {
-    				a += 1;
-    			}
-    			j++;
-    		}
-    		
-    		if(a == 2 ) {
-    			answer += 1;
-    		}
-    			a=0;	
-    		}
+	    	while(num != 0) {
+	    		
+	    		
+	    	}
+	    	
+    	}
     	
         return answer;
     }
