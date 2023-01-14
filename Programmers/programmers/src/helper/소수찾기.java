@@ -157,8 +157,8 @@ public class 소수찾기 {
 		 
 		public static boolean[] prime;	// 소수를 체크할 배열
 		public static void main(String[] args) {
-	 
-			make_prime(N);
+			int num1 = 30;
+			make_prime(num1);
 	 
 			for(int i = 0; i < prime.length; i++) {
 				if(prime[i] == false) {	// 소수(false)일 경우 출력
@@ -182,7 +182,6 @@ public class 소수찾기 {
 			}
 	        
 			prime[0] = prime[1] = true;
-			
 	        
 			// 제곱근 함수 : Math.sqrt()
 			for(int i = 2; i <= Math.sqrt(N); i++) {
