@@ -48,7 +48,7 @@ public class A못품_숫자의표현 {
     	 * 16 => 16
     	 * 
     	 * 1 2 4 8 16 32 64 ... 
-    	 */
+    	 */ 
         int answer = 0;
         return answer;
     }
