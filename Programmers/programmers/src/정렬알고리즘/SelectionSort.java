@@ -48,9 +48,6 @@ public class SelectionSort {
 	 * 
 	 * 성적순으로 정렬하면 가희가 가영이보다 앞에 있게 된다.
 	 * 
-	 * 
-	 * 
-	 * 
 	 */
 	public static void main(String[] args) {
 		int[] a = {2,13,4,5,45,10,30,22,5,6};
