@@ -1,6 +1,6 @@
 package level1;
 
-public class A못품_소수찾기 {
+public class 소수찾기 {
 
 	public static void main(String[] args) {
 		/*
