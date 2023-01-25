@@ -1,5 +1,6 @@
 package level2;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class A못품_이진변환반복하기 {
@@ -39,6 +40,8 @@ public class A못품_이진변환반복하기 {
 	        int zero = 0;
 	        
 	        String[] arr = s.split("");
+	        
+	        ArrayList ll = new ArrayList();
 	        
 	        for(String a : arr) {
 	        	// linkedList 컬렉션에 문자 추가.
