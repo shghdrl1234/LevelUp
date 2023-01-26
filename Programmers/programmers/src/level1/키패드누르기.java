@@ -1,6 +1,6 @@
 package level1;
 
-public class A못품_키패드누르기 {
+public class 키패드누르기 {
 	/* 
 	 * 1 2 3
 	 * 4 5 6
@@ -27,16 +27,20 @@ public class A못품_키패드누르기 {
 	 * 왼손 엄지손가락을 사용한 경우는 L, 오른손 엄지손가락을 사용한 경우는 R을 순서대로 이어붙여 문자열 형태로 return 해주세요.
 	 * 
 	 */
+	public static void main(String[] args) {
+		
+		solution(new int[]{1,3,4,5,8,2,1,4,5,9,5} , "right");
+	}
 
-    public String solution(int[] numbers, String hand) {
+    public static String solution(int[] numbers, String hand) {
     	/*
     	 * 내가 문제 푸는 방법.
     	 * 1, 4, 7, *은 왼쪽으로 3, 6, 9, #은 오른쪽으로.
     	 * 2, 5, 8, 0은 양 엄지손가락 중 가까운 쪽, 단, 거리가 같으면 주로 쓰는 손으로 한다.
     	 * 
     	 * 1. 각 손가락의 현재 위치를 알려주는 변수가 필요함. 
-    	 * => (* 0 #)의 위치는 1, (7 8 9)의 위치는 2, (4 5 6)의 위치는 3, (1 2 3)의 위치는 4로 나타낸다.
-    	 * => 세 줄 중에 양쪽 두 줄의 부호는 -를 붙인다. => 부호가 양수이면 2번 위치에 있다는 것.  
+    	 * => (* 0 #)의 위치는 4, (7 8 9)의 위치는 3, (4 5 6)의 위치는 2, (1 2 3)의 위치는 1로 나타낸다.
+    	 * => 세 줄 중에 양쪽 두 줄의 부호는 -를 붙인다. => 부호가 양수이면 가운데 줄에 있다는 것.  
     	 * => 부호가 음수이면, 가운데 줄로 가기 위해 한 번 더 움직여야한다.
     	 * 
     	 * 2. 그리고 각 손가락의 위치부터 2, 5, 8, 0 과의 거리를 알 수 있는 메서드를 만들어야함.
@@ -54,49 +58,52 @@ public class A못품_키패드누르기 {
     	
     	
     	for(int i = 0; i < numbers.length; i++) {
+    		
     		// 1, 4, 7 이면 현재 위치는 1,2,3 중 하나, 부호는 -1
     		if(numbers[i] == 1 || numbers[i] == 4 || numbers[i] == 7) {
     			answer += "L";
     			
-    			right = numbers[i]/3+1;
-    			right_loc = -1;
+    			left = numbers[i]/3+1;
+    			left_loc = -1;
     		
     			// 3, 6, 9 이면 현재 위치는 1,2,3 중 하나, 부호는 -1	
     		} else if(numbers[i] == 3 || numbers[i] == 6 || numbers[i] == 9) {
     			answer += "R";
     			
-    			left = numbers[i]/3;
-    			left_loc = -1;
+    			right = numbers[i]/3;
+    			right_loc = -1;
     		
-    			// 가운데 줄이 온다면..
-    		} else if( UseFinger(right, right_loc, left, left_loc, numbers[i], hand).equals("R") ) {
-    			// 2 5 7 0
-    			answer += "R";
-    			right_loc = 0;
+    			// 2, 5, 8, 0이 온다면
+    		} else { 
+    			// 메서드에 의해서 결정
+    			String FG = UseFinger(right,right_loc,left,left_loc,numbers[i],hand); 
+
+    			answer += FG;
     			
-    			if(numbers[i] == 0) {
+    			// 리턴값에 의해 위치 결정
+    			if(FG.equals("R") && numbers[i] != 0) {
+    				
+    				right = numbers[i]/3 +1;
+    				right_loc = 1;
+    			} else if(FG.equals("L") && numbers[i] != 0) {
+    				
+    				left = numbers[i]/3 +1;
+    				left_loc = 1;
+    			} else if(FG.equals("R") && numbers[i] == 0 ) {
     				right = 4;
+    				right_loc = 1;
+    				
     			} else {
-    				right = numbers[i]/3+1;
-    			}
-    			
-    		} else {
-    			answer += "L";
-    			left_loc = 0;
-    			
-    			if(numbers[i] == 0) {
     				left = 4;
-    			} else {
-    				left = numbers[i]/3+1;
+    				left_loc = 1;
     			}
     		}
-    	}
-    	
-    	
+    	} 
+    	System.out.println(answer);
         return answer;
     }
 
-	private String UseFinger(int right, int right_loc, int left, int left_loc, int i, String hand) {
+	private static String UseFinger(int right, int right_loc, int left, int left_loc, int i, String hand) {
 		
 		int num = 0;
 		String finger ="";
@@ -123,16 +130,24 @@ public class A못품_키패드누르기 {
 		left_move += Math.abs(num-left);
 		
 		if(right_move - left_move < 0) {
-			finger += "R";
+			finger = "R";
 		} else if(right_move - left_move > 0) {
-			finger += "L";
+			finger = "L";
 		} else if(hand.equals("right")) {
-			finger += "R";
+			finger = "R";
 		} else {
-			finger += "L";
+			finger = "L";
 		}
 
 		return finger;
 	}
 	
 }
+
+/*
+ * 생각만하고 쉽게 구현이 가능했다.
+ * 하지만 left와 right를 잘못 기입하였고,
+ * 코드 분석중 인지를 하지 못하여 정답처리 까지 소요된 시간이 많았다.
+ * 실수만 안하면 쉬운문제.
+ */
+
