@@ -30,19 +30,12 @@ public class A못품_숫자짝꿍 {
 		 *  3 ≤ X, Y의 길이(자릿수) ≤ 3,000,000입니다. 
 		 *  X, Y는 0으로 시작하지 않습니다. X, Y의 짝꿍은 상당히 큰 정수일 수 있으므로, 문자열로 반환합니다.
 		 * 
-		 * 
-		 * 
 		 */
 		String x ="5525";
 		String y ="1255";
 		
 		System.out.println(solution2(x,y));
-		
-		
-		
 	}
-	
-	
 	
 	public static String solution2(String X, String Y) {
         
@@ -52,8 +45,6 @@ public class A못품_숫자짝꿍 {
 		 * 1. 숫자를 이용하여 문제를 푼다.
 		 * 2. 각 숫자별로 출현한 횟수를 구한 다음
 		 * 3. 작게 나온 쪽을 최대 값으로 잡는다. 
-		 * 
-		 * 
 		 * 
 		 */
 		ArrayList<Integer> xArr = new ArrayList<Integer>();
