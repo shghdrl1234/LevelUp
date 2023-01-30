@@ -36,10 +36,9 @@ public class 구명보트 {
 		 * => 태워보내고, 원소의 순서는 max에서 한 칸 앞으로 당겨온다.
 		 * 3. limit보다 크지 않다면, 두 원소를 태워 보낸다.
 		 */
+
 		int answer = 0; 
-		
 		Arrays.sort(people);
-		
 		int min_index = 0;
 		int max_index = people.length-1;
 		

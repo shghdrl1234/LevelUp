@@ -3,7 +3,7 @@ package level2;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class A못품_이진변환반복하기 {
+public class 이진변환반복하기 {
 
 	public static void main(String[] args) {
 		/*
@@ -26,7 +26,51 @@ public class A못품_이진변환반복하기 {
 		 */
 		solution("01110");
 	}
-	   public static int[] solution(String s) {
+	
+	 public static int[] solution(String s) {
+	    	/*
+	    	 * 내가 문제 푸는 방법
+	    	 * 1. s의 각 숫자를 나타내는 문자를 split 하여 문자열 배열로 만든다.
+	    	 * 2. 문자열 배열을 순회하면서 그 값이 0이 아니면, 리스트에 추가한다.
+	    	 * 3. 그 리스트 값의 길이를 다시 이진법으로 바꾸고, 1번의 과정을 반복한다. 리스트의 값이 1만 남을 때 까지.
+	    	 * 
+	    	 * 문자열의 삭제, 변경이 주로 발생함 => linkedList?
+	    	 */
+	        int[] answer = {0, 0};
+	        
+	        String[] strA = s.split("");
+	        int k = 1;
+	        int zero = 0;
+	        ArrayList<String> arr = new ArrayList<String>();
+	     
+	        for(int i = 0; i < strA.length; i++) {
+	        	if(Integer.valueOf(strA[i]) != 0) {
+	        		arr.add(strA[i]);
+	        	} else {
+	        		zero ++;
+	        	}
+	        }
+	        
+	        while(arr.size() > 1) {
+		        String[] leng = Integer.toBinaryString(arr.size()).split("");
+		        arr.clear(); k++;
+		        for(int i = 0; i < leng.length; i++) {
+		        	if(Integer.valueOf(leng[i]) != 0) {
+		        		arr.add(leng[i]);
+		        		System.out.println(leng[i]);
+		        	} else {
+		        		zero++;
+		        	}
+		        }
+	        }
+	        
+	        answer[0] = k;
+	        answer[1] = zero;
+	        
+	        return answer;
+	    }
+
+	   public static int[] solution2(String s) {
 	    	/*
 	    	 * 내가 문제 푸는 방법
 	    	 * 1. s에서 0을 제거 한다. => 0의 개수만큼 카운트
@@ -77,3 +121,10 @@ public class A못품_이진변환반복하기 {
 	    }
 
 	}
+
+/*
+ * solution2 메서드로 제출했을 때에는 시간초과가 떴었다.
+ * 
+ * 이후 코드를 조금 변경하여 solution메서드로 제출하여 통과되었다.
+ * 
+ */
