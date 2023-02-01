@@ -63,9 +63,9 @@ public class Euclidean_Algorithm {
 	
 	public static void main(String[] args) {
 		System.out.println("최대 공약수 : " + GCD(15,10));
-		System.out.println("최대 공배수 : " + 15*10 / GCD(15,10));
+		System.out.println("최소 공배수 : " + 15*10 / GCD(15,10));
 		
-		System.out.println("최대 공배수 : " + LCM(new int[]{1,5,10,15,20}));
+		System.out.println("최소 공배수 : " + LCM(new int[]{1,5,10,15,20}));
 	}
 
 }

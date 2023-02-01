@@ -3,6 +3,8 @@ package level2;
 public class A못품_조이스틱 {
 
 	public static void main(String[] args) {
+		
+		
 		/*
 		 * 문제 설명 
 		 * 조이스틱으로 알파벳 이름을 완성하세요. 
@@ -31,14 +33,47 @@ public class A못품_조이스틱 {
 		 * 
 		 */
 		
-		System.out.println('N' - 'A');
-		System.out.println('Z' - 'N');
-		System.out.println('Z' - 'A');
-		System.out.println('Z' - 'J');
-		 
+		System.out.println('J' - 'A' + 'N' - 'A' +1);
+		System.out.println('N' - 'Z');
+		System.out.println('Z' - 'O');
+		
+	}
+	public static int solution1(String name) {
+	        int answer = 0;
+	        int move = name.length() - 1; // 정방향으로 이동하였을 경우.
+	        
+	        /*
+	         * 정방향으로 이동할 때의 반복문
+	         */
+	        for(int i = 0; i < name.length(); i++) {
+	        	
+	        	// 현재 위치(인덱스)가 요구하는 알파벳으로 바꾸기 위한 상하 조작.
+	        	// 알파벳이 N보다 작으면, 앞의 파라미터가, N보다 크면 뒤의 파라미터가 최소값이 된다. 
+	            answer += Math.min(name.charAt(i) - 'A', 26 - (name.charAt(i) - 'A')); //상,하 알파벳 맞추기.
+	            
+	            // 현재 인덱스가 마지막 인덱스보다 작고, 다음 위치의 알파벳이 A가 등장하면
+	            // 다음 위치의 A부터 연속된 A의 개수를 찾아준다.
+	            if (i < name.length() - 1 && name.charAt(i + 1) == 'A') {
+	                int endA = i + 1;
+	                
+	                // endA 인덱스가 마지막 인덱스보다 작고, endA 위치의 인덱스가 A를 가르키면 계속 반복.
+	                while(endA < name.length() && name.charAt(endA) == 'A')
+	                    // 반복문이 진행되면 다음 반복문 진행 여부를 위해 endA의 값에 1 추가.
+	                	endA++;
+	                
+	                // 이 식은 순회하면서 계속 실행된다. 그리고 상위 for문은 상하 조작의 횟수만 기여하므로
+	                // move에 대해서 상관 할 필요가 없다.
+	                
+	                // while문과 for문 순회중에는 고려안해도 되며, 
+	                // while의 마지막 순회일 때 최종적인 move의 값만 구하면 된다. 
+	                move = Math.min(move, i * 2 + (name.length() - endA));// 오른쪽으로 갔다 다시 왼쪽으로 꺾기.
+	                move = Math.min(move, i + (name.length() - endA) * 2);// 왼쪽으로 갔다 다시 오른쪽으로 꺾기.
+	            }
+	        }
+	        return answer + move;
 	}
 	
-    public static int solution(String name) {
+    public static int solution2(String name) {
         /*
          * 내가 문제 푸는 방법
          * 1. 모든 이름은 A부터 시작된다. 
@@ -48,7 +83,8 @@ public class A못품_조이스틱 {
          * => 모든 이름은 A부터 시작이다. N 이전의 알파벳은 A부터 순서대로, N 이후의 알파벳은 A부터 역순으로 이동하는 것이 빠르다.
          * => B~N 까지는 정방향, M~Z까지는 역방향, (N은 정방향, 역방향 상관없지만 헷갈리지 않도록 한 쪽에 넣음.)
          * 0A 1B 2C 3D 4E 5F 6G 7H 8I 9J 10K 11L 12M 13N 14O 15P 16Q 17R 18S 19T 20U 21V 22W 23X 24Y 25Z
-         * 
+         * 12O 11P 10Q 9R 8S 7T 6U 5V 4W 3X 2Y 1Z 0A 1B 2C 3D 4E 5F 6G 7H 8I 9J 10K 11L 12M // 13N
+         *  
          * 3. 이름의 첫번째를 기준으로 요구되는 A의 거리를 비교해야함.
          * ex) BCCCCAACCA => B 다음에 오는 C가 있기 때문에 정방향이 유리함.
          * => 왜냐하면, 역방향으로 가게되면 결국엔 두번째 C까지 9번 이동해야함.
@@ -73,57 +109,86 @@ public class A못품_조이스틱 {
     	int forward = 0;
     	int reverse = 0; 
     	
-    	while(i < name.length() && j > 0 && forward == reverse) {
+    	while(i < name.length()) {
     		
     		// 역방향의 끝부분 부터 이어지는 A의 개수
     		if(name.charAt(i) == 'A') {
     			reverse++;
     		}
+
+    		if(name.charAt(i) != 'A') {
+    			break;
+    		}
+    	     i++;
+    	}
+    	
+    	while(j > 1) {
+    		
     		// 정방향의 끝부분 부터 이어지는 A의 개수
     		if(name.charAt(j) == 'A') {
     			forward++;
     		}
     		
-    		// 두 방향 끝부분 전부다 A가 아니면, 어떤 방향이든 끝부분까지 이동해야함.
-    		if(reverse == 0 && forward == 0) {
+    		if(name.charAt(j) != 'A') {
     			break;
     		}
-    		
+    	     j--;
     	}
     	
     	// 정방향으로 이동(같은 경우는 어디로 가도 상관없음.) 
     	if(forward >= reverse) {
-    		
-    		for(int k = 0; k < name.length(); k++) {
+    		for(int k = 0; k < name.length()-forward; k++) {
+
+//    			if(name.charAt(k) == 'A') {
+//    				answer++; continue; 
+//    			}
     			
     			// 요구되는 앞파벳이 N보다 작으면 위로(정방향으로 이동)
     			if(name.charAt(k) <= 'N') {
-    				answer += 'N' - name.charAt(k);
-    			} else {
-    				answer += 'Z' - name.charAt(k) + 1;
-    			}
-    			
-    		}
-    		answer += name.length() - 1 - forward;
-    		
-    	// 역방향으로 이동
-    	} else {
-    		
-    		for(int k = name.length()-1; k >= 0; k++) {
-    			
-    			// 요구되는 앞파벳이 N보다 크면 아래로(역방향으로 이동)
-    			if(name.charAt(k) <= 'N') {
-    				answer += 'N' - name.charAt(k);
+    				answer += name.charAt(k) - 'A';
     			} else {
     				answer += 'Z' - name.charAt(k) +1;
     			}
-    			
+    			answer++;
     		}
     		
-    		answer += name.length() - 1 - reverse;
+    	// 역방향으로 이동
+    	} else {
+    		// k가 문자열 마지막부터 반복되므로 처음 위치한 문자열에 대해 계산.
+    		if(name.charAt(0) <= 'N') {
+    			answer += name.charAt(0) - 'A';
+    		} else {
+				answer += 'Z' - name.charAt(0) +1;
+			}
+    		answer++;
+    		
+    		for(int k = name.length()-1; k >= reverse; k--) {
+    			
+//    			if(name.charAt(k) == 'A') {
+//    				answer++; continue; 
+//    			}
+    			
+    			// 요구되는 앞파벳이 N보다 작으면 위로(정방향으로 이동)
+    			if(name.charAt(k) <= 'N') {
+    				answer += name.charAt(k) - 'A';
+    			} else {
+    				answer += 'Z' - name.charAt(k) +1;
+    			}
+    			answer++;
+    		}
+    		
     	}
-    	
-        return answer;
+        return answer-1; // 마지막으로 문자열 때 옆으로 이동하는 코드가 계산됨. 빼줘야함
     }
-
 }
+
+/*
+ * solution2가 내가 풀었던 코드이다. 59점으로 나왔다.
+ * 내가 고려한 것은 주어진 문자열을 선택할 떄의 방향을 정방향 또는 역방향으로만 생각하여 풀었다.
+ * 
+ * 하지만 정방향에서 역방향으로, 역방향에서 정방향으로 이동하는 것도 고려하였어야 했다.
+ * 
+ * 복잡한 방법으로 구현하려 하였으나, 다른 사람의 코드를 참고하여 하나의 for문 내부에서 해결할 수 있다는 것을
+ * 확인 하였다.
+ * 
+ */ 
