@@ -1,6 +1,6 @@
 package level2;
 
-public class A못품_피로도 {
+public class 피로도 {
 	
 	boolean[] checkDungeons;
 	int answer = 0;
