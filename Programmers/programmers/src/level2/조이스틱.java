@@ -1,6 +1,6 @@
 package level2;
 
-public class A给前_炼捞胶平 {
+public class 炼捞胶平 {
 
 	public static void main(String[] args) {
 		
