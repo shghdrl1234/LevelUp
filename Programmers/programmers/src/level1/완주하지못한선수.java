@@ -1,11 +1,13 @@
 package level1;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
-public class A못품_완주하지못한선수 {
+public class 완주하지못한선수 {
 
 	public static void main(String[] args) {
 		/*
@@ -32,6 +34,77 @@ public class A못품_완주하지못한선수 {
 		
 		solution2(arr1,arr2);
 	}
+	
+	public static String solution4(String[] participant, String[] completion) {
+		
+		String answer = "";
+		Map<String, Integer> partMap = new HashMap<String, Integer>();
+		
+		for(String s : participant) {
+			partMap.put(s, partMap.getOrDefault(s, 1)+1);
+		}
+		
+		for(String s : completion) {
+			partMap.put(s, partMap.get(s)-1);
+		}
+		
+		for(String s : partMap.keySet()) {
+			if(partMap.get(s) != 1) {
+				answer = s;
+				break;
+			}
+		}
+		return answer;
+		
+	}
+	
+	public static String solution3(String[] participant, String[] completion) {
+		/*
+		 * 내가 문제 푸는 방법
+		 * 
+		 * 한 명을 제외하고 모든 선수가 완주하였다.
+		 * 마라톤 경기에 참여한 선수 중에 돔명이인이 존재할 수도 있다.
+		 * 
+		 * participant와 completion을 HashMap으로 구현한다.
+		 * => Key는 선수의 이름, value는 key의 이름을 가진 선수의 수.
+		 * 
+		 * 이후 같은 키를 찾아 비교하며, 값이 다르면 그 선수가 완주 못한 것.
+		 * 
+		 */
+		String answer = "";
+		Map<String, Integer> partMap = new HashMap<String, Integer>();
+		Map<String, Integer> compMap = new HashMap<String, Integer>();
+		
+		for(String s : participant) {
+			partMap.put(s, partMap.getOrDefault(s, 1)+1);
+		}
+		
+		for(String s : completion) {
+			compMap.put(s, compMap.getOrDefault(s, 1)+1);
+		}
+		
+		for(int i = 0; i < participant.length; i++) {
+			
+			if(!compMap.containsKey(participant[i])) {
+				answer = participant[i];
+				break;
+			}
+			
+			if(compMap.get(participant[i]) == null) {
+				answer = participant[i];
+				break;
+			}
+			
+			if(partMap.get(participant[i]) != compMap.get(participant[i])) {
+				answer = participant[i];
+			}
+			
+		}
+		
+		return answer;
+		
+	}
+		
 	
 	public static String solution2(String[] participant, String[] completion) {
 		/*
@@ -167,5 +240,123 @@ public class A못품_완주하지못한선수 {
     	System.out.println(answer);
         return answer;
     }
+
+}
+
+/*
+ * 여러번의 시도 끝에 문제를 풀었다.
+ * hash를 쓰고 있었는데 생각보다 잘 안풀려 졌다.
+ * 마지막 방법으로 각각의 hashMap을 생성하여 하나의 hashMap의 값을 변경하는 것으로,
+ * 해당 hashMap의 values가 다른 것만 찾아내면 된다. 
+ */
+
+
+ class 완주하지못한선수_다른사람 {
+
+    int bucketSize;
+    List<Entry>[] bucket;
+
+    public String solution(String[] participant, String[] completion) {
+        bucketSize = (completion.length / 5)+1;
+        bucket = new List[bucketSize];
+
+        for (int i = 0; i < completion.length; i++) {
+            Entry entry = get(completion[i]);
+            entry.value += 1;
+        }
+
+        for (int i = 0; i < participant.length; i++) {
+            Entry entry = get(participant[i]);
+            if (entry != null && entry.value > 0) {
+                entry.value -= 1;
+            } else {
+                return entry.key;
+            }
+        }
+        throw new RuntimeException("error");
+    }
+
+    private Entry get(String s) {
+        int idx = hash(s);
+        List<Entry> list = bucket[idx];
+        if (list == null) {
+            list = new List<Entry>();
+            Entry entry = new Entry(s, 0);
+            list.add(entry);
+            bucket[idx] = list;
+            return entry;
+        } else {
+            Entry entry = list.get(s);
+            if (entry == null) {
+                entry = new Entry(s, 0);
+                list.add(entry);
+            }
+            return entry;
+        }
+    }
+
+
+    private int hash(String s) {
+        int num = 0;
+        for(int i=0; i<s.length(); i++) {
+            num += s.codePointAt(i) * 31 + s.codePointAt(i);
+        }
+        return num % bucketSize;
+    }
+
+    class Entry {
+        String key;
+        int value;
+
+        public Entry(String key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    class List<T extends Entry> {
+        Node head;
+
+        public void add(T entry) {
+            Node nn = new Node(entry, null);
+
+            if (head == null) {
+                head = nn;
+            } else {
+                Node last = head;
+                while (last.next != null) {
+                    last = last.next;
+                }
+                last.next = nn;
+            }
+        }
+
+        public <T extends Entry> T get(String s) {
+            Node node = head;
+            while (node != null) {
+                if (node.data.key.equals(s)) {
+                    return (T) node.data;
+                }
+                node = node.next;
+            }
+
+            return null;
+        }
+
+        class Node<T extends Entry> {
+            T data;
+            Node next;
+
+            public Node(T data, Node next) {
+                this.data = data;
+                this.next = next;
+            }
+        }
+    }
+/*
+ * hashMap을 직접 구현한 분의 코드..
+ 
+ * 
+ */
 
 }
